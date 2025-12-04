@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kirtan Invitation</title>
+  <!-- Important for proper mobile scaling -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg1: #fce9d2;
+      --bg2: #f7d0aa;
+      --bg3: #e6b381;
+      --text-main: #4a3218;
+      --text-sub: #7a5630;
+      --accent: #b67a2e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, var(--bg1), var(--bg2), var(--bg3));
+      animation: bgGlow 12s ease-in-out infinite alternate;
+      overflow-x: hidden;
+    }
+
+    @keyframes bgGlow {
+      0% {
+        background: radial-gradient(circle at top, var(--bg1), var(--bg2), var(--bg3));
+      }
+      50% {
+        background: radial-gradient(circle at 20% 0, #fff4da, #f8c899, #e0a36f);
+      }
+      100% {
+        background: radial-gradient(circle at 80% 0, #ffe9c0, #f2b37f, #d38d58);
+      }
+    }
+
+    .invitation-wrapper {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .decor-left,
+    .decor-right {
+      position: absolute;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      opacity: 0.16;
+      pointer-events: none;
+      animation: floatUpDown 6s ease-in-out infinite;
+    }
+
+    .decor-left {
+      left: 5%;
+      top: 12%;
+      animation-delay: -2s;
+    }
+
+    .decor-right {
+      right: 5%;
+      bottom: 10%;
+      animation-delay: -4s;
+    }
+
+    @keyframes floatUpDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .invitation-card {
+      width: min(92vw, 640px);
+      background: linear-gradient(135deg, #fffaf1 0%, #fff3e1 45%, #ffe6c4 100%);
+      border-radius: 22px;
+      padding: clamp(20px, 4vw, 32px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(130, 90, 40, 0.35);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: cardEnter 0.9s ease-out forwards 0.2s;
+    }
+
+    @keyframes cardEnter {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .invitation-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: conic-gradient(
+        from 0deg,
+        rgba(255, 189, 89, 0.9),
+        rgba(184, 116, 48, 0.8),
+        rgba(255, 235, 181, 0.9),
+        rgba(184, 116, 48, 0.8),
+        rgba(255, 189, 89, 0.9)
+      );
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      animation: borderGlow 10s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes borderGlow {
+      to { transform: rotate(360deg); }
+    }
+
+    .invitation-card::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 224, 145, 0.35), transparent 70%);
+      top: -80px;
+      right: -30px;
+      pointer-events: none;
+      filter: blur(0.5px);
+    }
+
+    .mantra {
+      font-size: clamp(0.75rem, 1.6vw, 0.9rem);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #9a6630;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.9rem, 4.8vw, 2.4rem);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .subtitle {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(0.9rem, 2.3vw, 1.1rem);
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-sub);
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .divider {
+      width: 90px;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+      margin: 6px auto 18px;
+      position: relative;
+    }
+
+    .divider::before {
+      content: "ॐ";
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.1rem;
+      background: #fdf4e6;
+      padding: 0 8px;
+      color: #b3752b;
+    }
+
+    .details {
+      font-size: clamp(0.88rem, 2vw, 1rem);
+      color: #5a4327;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    .details strong {
+      font-family: "Playfair Display", serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9em;
+      color: #7a4f20;
+    }
+
+    .date-time {
+      margin: 10px 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .highlight {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(182, 122, 46, 0.6);
+      background: rgba(255, 248, 233, 0.95);
+      margin-top: 4px;
+      font-weight: 500;
+      box-shadow: 0 4px 12px rgba(166, 109, 45, 0.2);
+      backdrop-filter: blur(2px);
+    }
+
+    .address {
+      margin-bottom: 14px;
+    }
+
+    .note {
+      margin-top: 4px;
+    }
+
+    .name {
+      margin-top: 10px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .footer-note {
+      font-size: 0.85rem;
+      color: #7e623d;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* Tablets and up: center plus a bit bigger */
+    @media (min-width: 768px) {
+      .invitation-card {
+        padding: 32px;
+      }
+
+      .date-time {
+        flex-direction: row;
+        justify-content: center;
+        gap: 28px;
+      }
+    }
+
+    /* Very small phones */
+    @media (max-width: 390px) {
+      .subtitle {
+        letter-spacing: 0.18em;
+      }
+      .divider::before {
+        top: -12px;
+      }
+      .decor-left,
+      .decor-right {
+        display: none; /* hide icons if screen super small */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="invitation-wrapper">
+    <!-- Decorative icons -->
+    <div class="decor-left">🎵</div>
+    <div class="decor-right">🪔</div>
+
+    <!-- Main card -->
+    <div class="invitation-card">
+      <div class="mantra">With the blessings of the Almighty</div>
+
+      <div class="title">Kirtan</div>
+      <div class="subtitle">At Our Home</div>
+
+      <div class="divider"></div>
+
+      <div class="details date-time">
+        <div>
+          <strong>Date</strong><br />
+          <span class="highlight">5 December 2025 (Friday)</span>
+        </div>
+        <div>
+          <strong>Time</strong><br />
+          <span class="highlight">3:30 PM</span>
+        </div>
+      </div>
+
+      <div class="details address">
+        <strong>Venue</strong><br />
+        Our Residence<br />
+        <!-- Replace this with your full address -->
+        <span>Address : Shankar Bazar, Chandpur</span>
+      </div>
+
+      <div class="details note">
+        We cordially invite youto join us for an afternoon of
+        soulful kirtan, devotion and blessings.
+      </div>
+
+      <div class="name">Hosted by: Ruchi Goel</div>
+
+      <div class="footer-note">
+        Your presence will make the occasion more divine and memorable.
+      </div>
+    </div>
+  </div>
+</body>
+</html>
